@@ -1,0 +1,229 @@
+﻿@page
+@using Domain.Enums
+@model IndexModel
+@{
+}
+<h2>@Model.Kund?.Namn</h2>
+
+<form method="get" class="d-flex align-items-center">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <input type="text"
+           name="personnummer"
+           class="form-control me-2"
+           style="max-width: 180px;"
+           placeholder="Personnummer" />
+
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+@if (Model.Person != null)
+{
+    <br />
+    <h2>Information</h2>
+    <p>@Model.Person.Personnummer</p>
+    <p>@Model.Person.Info</p>
+
+    <h2>Företräde och konvertering</h2>
+   
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Idag</th>
+                <th>Senaste</th>
+                <th>Senaste anställning</th>
+                <th>Datum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Förerträde Allmän</td>
+                <td>@Model.Person.ForetradeAllmanIdagTid</td>
+                <td>@Model.Person.ForetradeAllmanSenasteTid</td>
+                <td>@(Model.Person.ForetradeAllmanSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeAllmanSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.ForetradeAllmanDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeAllmanDatum)</td>
+            </tr>
+            <tr>
+                <td>Företräde Säv</td>
+                <td>@Model.Person.ForetradeSavIdagTid</td>
+                <td>@Model.Person.ForetradeSavSenasteTid</td>
+                <td>@(Model.Person.ForetradeSavSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSavSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.ForetradeSavDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSavDatum)</td>
+            </tr>
+            <tr>
+                <td>Företräde Säsong</td>
+                <td>@Model.Person.ForetradeSasongIdagTid</td>
+                <td>@Model.Person.ForetradeSasongSenasteTid</td>
+                <td>@(Model.Person.ForetradeSasongSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSasongSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.ForetradeSasongDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSasongDatum)</td>
+            </tr>
+            <tr>
+                <td>Konvertering Vik</td>
+                <td>@Model.Person.KonverteringVikIdagTid</td>
+                <td>@Model.Person.KonverteringVikSenasteTid</td>
+                <td>@(Model.Person.KonverteringVikSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringVikSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.KonverteringVikDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringVikDatum)</td>
+            </tr>
+            <tr>
+                <td>Konvertering Säv</td>
+                <td>@Model.Person.KonverteringSavIdagTid</td>
+                <td>@Model.Person.KonverteringSavIdagTid</td>
+                <td>@(Model.Person.KonverteringSavSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringSavSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.KonverteringSavDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringSavDatum)</td>
+            </tr>
+            <tr>
+                <td>Konvertering Ava</td>
+                <td>@Model.Person.KonverteringAvaIdagTid</td>
+                <td>@Model.Person.KonverteringAvaSenasteTid</td>
+                <td>@(Model.Person.KonverteringAvaSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringAvaSenasteAnstallningDatum)</td>
+                <td>@(Model.Person.KonverteringAvaDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringAvaDatum)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Anställningstid</h2>
+
+     <table class="table table-bordered table-striped">
+    
+        <tbody>
+            @if (Model.Person.HistorisktBrytDatum > DateOnly.MaxValue)
+            {
+                <tr>
+                    <td>Historisk tid</td>
+                    <td>@Model.Person.HistoriskTid</td>
+                </tr>
+                <tr>
+                    <td>Historisk brytdatum</td>
+                    <td>@Model.Person.HistorisktBrytDatum</td>
+                </tr>
+            }
+
+            @if (Model.Person.TillagsTid > 0)
+            {
+                <tr>
+                    <td>Tilläggstid</td>
+                    <td>@Model.Person.TillagsTid</td>
+                </tr>
+            }
+            <tr>
+                <td>Total tid</td>
+                <td>@(Model.Person.HistoriskTid + Model.Person.TillagsTid + Model.Person.AnstallningsTid)</td> 
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Anställningar</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Tom</th>
+                <th>AnstNummer</th>
+                <th>Löneform</th>
+                <th>Avtal</th>
+                <th>Klass</th>
+                <th>Kod</th>
+                <th>Avgångsorsak</th>
+                <th>Kod</th>
+                <th>Syssgrad</th>
+                <th>Organisation</th>
+                <th>Text</th>
+                <th>Befattning</th>
+                <th>Text</th>
+                <th>Låst</th>
+                <th>Vilande</th>
+                <th>System</th>
+                <th>Regtid</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var anst in Model.Person.Anstallningar
+                    .Where(a => a.LoneformTyp != LoneformTyp.Dagar)
+                    .OrderBy(a => a.Tom != null)
+                    .ThenByDescending(a => a.Tom))
+            {
+                <tr class="anst-row table-secondary" data-anstid="@anst.Id">
+                    <td style="white-space: nowrap;">@anst.From</td>
+                    <td style="white-space: nowrap;">@anst.Tom</td>
+                    <td style="white-space: nowrap;">@anst.Anstallningsnummer</td>
+                    <td style="white-space: nowrap;">@anst.LoneformTyp.ToString()</td>
+                    <td style="white-space: nowrap;">@anst.AvtalKod</td>
+                    <td style="white-space: nowrap;">@anst.AnstallningsKlassificeringTyp.ToString()</td>
+                    <td style="white-space: nowrap;">@anst.AnstallningsKlassificeringKod</td>
+                    <td style="white-space: nowrap;">@(anst.AvgangsorsaksTyp == AvgangsorsaksTyp.NaN ? "" : anst.AvgangsorsaksTyp.ToString())</td>
+                    <td style="white-space: nowrap;">@anst.AvgangsorsakKod</td>
+                    <td style="white-space: nowrap;">@anst.Sysselsattningsgrad.ToString("N3")</td>
+                    <td style="white-space: nowrap;">@anst.OrganisationsKod</td>
+                    <td style="white-space: nowrap;">@anst.OrganisationsText</td>
+                    <td style="white-space: nowrap;">@anst.BefattningsKod</td>
+                    <td style="white-space: nowrap;">@anst.BefattninsText</td>
+                    <td style="white-space: nowrap;">@(anst.Last ? "Ja" : "")</td>
+                    <td style="white-space: nowrap;">@(anst.Vilande ? "Ja" : "")</td>
+                    <td style="white-space: nowrap;"></td>
+                    <td style="white-space: nowrap;"></td>
+                </tr>
+
+                @foreach (var dagar in Model.Person.Anstallningar
+                        .Where(a => a.LoneformTyp == LoneformTyp.Dagar &&
+                        a.Anstallningsnummer == anst.Anstallningsnummer))
+                {
+                    <tr class="dagar-row dagar-@anst.Id table-light" style="display:none;">
+                        <td style="white-space: nowrap;">@dagar.From</td>
+                        <td style="white-space: nowrap;">@dagar.Tom</td>
+                        <td style="white-space: nowrap;">@dagar.Anstallningsnummer</td>
+                        <td style="white-space: nowrap;">@dagar.LoneformTyp.ToString()</td>
+                        <td style="white-space: nowrap;">@dagar.AvtalKod</td>
+                        <td style="white-space: nowrap;">@dagar.AnstallningsKlassificeringTyp.ToString()</td>
+                        <td style="white-space: nowrap;">@dagar.AnstallningsKlassificeringKod</td>
+                        <td style="white-space: nowrap;">@(dagar.AvgangsorsaksTyp == AvgangsorsaksTyp.NaN ? "" : dagar.AvgangsorsaksTyp.ToString())</td>
+                        <td style="white-space: nowrap;">@dagar.AvgangsorsakKod</td>
+                        <td style="white-space: nowrap;">@dagar.Sysselsattningsgrad.ToString("N3")</td>
+                        <td style="white-space: nowrap;">@dagar.OrganisationsKod</td>
+                        <td style="white-space: nowrap;">@dagar.OrganisationsText</td>
+                        <td style="white-space: nowrap;">@dagar.BefattningsKod</td>
+                        <td style="white-space: nowrap;">@dagar.BefattninsText</td>
+                        <td style="white-space: nowrap;">@(dagar.Last ? "Ja" : "")</td>
+                        <td style="white-space: nowrap;">@(dagar.Vilande ? "Ja" : "")</td>
+                        <td style="white-space: nowrap;"></td>
+                        <td style="white-space: nowrap;"></td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+    <h2>Månadsackar</h2>
+         
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelectorAll(".anst-row").forEach(function (row) {
+
+            row.addEventListener("click", function () {
+
+                const id = row.dataset.anstid;
+
+                document.querySelectorAll(".dagar-" + id).forEach(function (dr) {
+
+                    // Toggle show/hide
+                    if (dr.style.display === "none") {
+                        dr.style.display = "";
+                    } else {
+                        dr.style.display = "none";
+                    }
+
+                });
+
+            });
+
+        });
+
+    });
+</script>
+

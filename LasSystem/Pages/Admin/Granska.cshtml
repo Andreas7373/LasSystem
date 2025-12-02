@@ -1,0 +1,53 @@
+﻿@page
+@model GranskaModel
+@{
+}
+<h2>@Model.Kund?.Namn</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row mb-2">
+        <div class="col">
+            <button asp-page-handler="Tid" class="btn btn-primary">Jämför anställningstid</button>
+            <button asp-page-handler="KonvVikIdag" class="btn btn-primary">Jämför KonvVikIdag</button>
+            <button asp-page-handler="KonvSavIdag" class="btn btn-primary">Jämför KonvSävaIdag</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button asp-page-handler="ForetradeAllmanIdag" class="btn btn-primary">Jämför FöreträdeAllmänIdag</button>
+            <button asp-page-handler="ForetradeSavIdag" class="btn btn-primary">Jämför FöreträdeSävaIdag</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.Resultat.Any())
+{
+    <h3>Resultat</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Personnummer</td>
+                <td>LasSystem</td>
+                <td>WinLas</td>
+                <td>Info</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Resultat)
+            {
+                <tr>
+                    <td><a asp-page="/Kund/Index" asp-route-id="@Model.Id" asp-route-personnummer="@row.Personnummer">@row.Personnummer</a></td>
+                    <td>@row.LasSystem</td>
+                    <td>@row.WinLas</td>
+                    <td>@row.Info</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div>@Model.Info</div>

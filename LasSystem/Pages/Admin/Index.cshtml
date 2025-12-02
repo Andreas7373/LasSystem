@@ -1,0 +1,83 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Kunder";
+}
+
+<h1>Kunder</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Skapa ny</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Kunder[0].Namn)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kund in Model.Kunder)
+        {
+            <tr data-kund-id="@kund.Id">
+                <td>
+                    <a asp-page="/Kund/Index" asp-route-id="@kund.Id">@kund.Namn </a>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@kund.Id" class="btn btn-sm btn-secondary">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@kund.Id" class="btn btn-sm btn-danger">Delete</a>
+                    <a asp-page="./Granska" asp-route-id="@kund.Id" class="btn btn-sm btn-primary ">Granska</a>
+                    <button class="btn btn-sm btn-primary migrate-btn">Migrate</button>
+                    <button class="btn btn-sm btn-primary calc-btn">Calc</button>
+
+                    <span class="spinner" style="display:none;"></span>
+                    <div class="log" style="display:inline-block; margin-left:5px;"></div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const migrateButtons = document.querySelectorAll(".migrate-btn");
+            const calcButtons = document.querySelectorAll(".calc-btn");
+
+            migrateButtons.forEach(btn => btn.addEventListener("click", () => handleAction(btn, "Migrate")));
+            calcButtons.forEach(btn => btn.addEventListener("click", () => handleAction(btn, "Calc")));
+
+            function handleAction(button, handlerName) {
+                const row = button.closest("tr");
+                const spinner = row.querySelector(".spinner");
+                const log = row.querySelector(".log");
+                const kundId = row.dataset.kundId;
+
+                spinner.style.display = "inline-block";
+                button.disabled = true;
+                log.innerText = "Pågår...";
+
+                fetch(`?handler=${handlerName}&id=${kundId}`, {
+                    method: "POST"
+                })
+                .then(res => res.json())
+                .then(data => {
+                    spinner.style.display = "none";
+                    button.disabled = false;
+                    log.innerText = data.message; // visa slutstatus
+                })
+                .catch(err => {
+                    spinner.style.display = "none";
+                    button.disabled = false;
+                    log.innerText = "Fel uppstod!";
+                    console.error(err);
+                });
+            }
+        });
+    </script>
+}

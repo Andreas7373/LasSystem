@@ -1,0 +1,107 @@
+﻿@page
+@model EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Kund</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Kund.Id" />
+            <div class="form-group">
+                
+                <label asp-for="Kund.Namn" class="control-label"></label>
+                <input asp-for="Kund.Namn" class="form-control" />
+                <span asp-validation-for="Kund.Namn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Kund.ImportSystemTyp" class="control-label"></label>
+                <select asp-for="Kund.ImportSystemTyp" asp-items="Model.ImportSystemTypList" class="form-control"></select>
+                <span asp-validation-for="Kund.ImportSystemTyp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Kund.BrytDatum" class="control-label"></label>
+                <input asp-for="Kund.BrytDatum" class="form-control" />
+                <span asp-validation-for="Kund.BrytDatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Kund.ConnectionStringWinLas" class="control-label"></label>
+                <input asp-for="Kund.ConnectionStringWinLas" class="form-control" />
+                <span asp-validation-for="Kund.ConnectionStringWinLas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <label asp-for="Kund.OmraknadWinLas" class="control-label"></label>
+                <input asp-for="Kund.OmraknadWinLas" class="form-control" />
+                <span asp-validation-for="Kund.OmraknadWinLas" class="text-danger"></span>
+            </div>
+            
+            <h4>Inställningar</h4>
+            <hr />
+
+            <div class="form-group">
+                <label asp-for="Kund.Pensionsalder" class="control-label"></label>
+                <input asp-for="Kund.Pensionsalder" class="form-control" />
+                <span asp-validation-for="Kund.Pensionsalder" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Kund.ForetradeAllmanDagar" class="control-label"></label>
+                <input asp-for="Kund.ForetradeAllmanDagar" class="form-control" />
+                <span asp-validation-for="Kund.ForetradeAllmanDagar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Kund.ForetradeSavDagar" class="control-label"></label>
+                <input asp-for="Kund.ForetradeSavDagar" class="form-control" />
+                <span asp-validation-for="Kund.ForetradeSavDagar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Kund.KonverteringLASDagar" class="control-label"></label>
+                <input asp-for="Kund.KonverteringLASDagar" class="form-control" />
+                <span asp-validation-for="Kund.KonverteringLASDagar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Kund.KonverteringSavDagar" class="control-label"></label>
+                <input asp-for="Kund.KonverteringSavDagar" class="form-control" />
+                <span asp-validation-for="Kund.KonverteringSavDagar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Kund.KonverteringVikDagar" class="control-label"></label>
+                <input asp-for="Kund.KonverteringVikDagar" class="form-control" />
+                <span asp-validation-for="Kund.KonverteringVikDagar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Kund.AnvandVarjeArbetsDagSomEnPerionVidSava" /> @Html.DisplayNameFor(model => model.Kund.AnvandVarjeArbetsDagSomEnPerionVidSava)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
