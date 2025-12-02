@@ -1,0 +1,62 @@
+## Build results
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+## User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vscode/
+
+## Visual Studio 2022/2019
+.vs/
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+## ASP.NET Core secrets & config
+appsettings.Development.json
+appsettings.Local.json
+secret.json
+
+## Logs
+*.log
+logs/
+
+## Publish output
+wwwroot/lib/
+*.publishsettings
+
+## Rider IDE
+.idea/
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Temporary files
+*.tmp
+*.temp
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+## Entity Framework
+Migrations/*Designer.cs
+*.jfm
+
+## dotenv
+.env
+.env.*
+
+## Other
+*.db
+*.sqlite

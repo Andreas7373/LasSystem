@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DKLTmdfPPT4=",
+  "dgSpecHash": "w/nMgrO7Elw=",
   "success": true,
-  "projectFilePath": "E:\\LasSystem4\\LasSystem\\LasSystem.csproj",
+  "projectFilePath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\LasSystem\\LasSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administratör\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Administratör\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

@@ -33,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\LasSystem4\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "E:\\LasSystem4\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\Administratör\\.nuget\\packages\\",
-      "outputPath": "E:\\LasSystem4\\Application\\obj\\",
+      "outputPath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -58,8 +58,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "E:\\LasSystem4\\Domain\\Domain.csproj": {
-              "projectPath": "E:\\LasSystem4\\Domain\\Domain.csproj"
+            "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Domain\\Domain.csproj"
             }
           }
         }

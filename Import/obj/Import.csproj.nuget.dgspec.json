@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\LasSystem4\\Import\\Import.csproj": {}
+    "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Import\\Import.csproj": {}
   },
   "projects": {
-    "E:\\LasSystem4\\Import\\Import.csproj": {
+    "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Import\\Import.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\LasSystem4\\Import\\Import.csproj",
+        "projectUniqueName": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Import\\Import.csproj",
         "projectName": "Import",
-        "projectPath": "E:\\LasSystem4\\Import\\Import.csproj",
+        "projectPath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Import\\Import.csproj",
         "packagesPath": "C:\\Users\\Administratör\\.nuget\\packages\\",
-        "outputPath": "E:\\LasSystem4\\Import\\obj\\",
+        "outputPath": "C:\\Users\\Administratör\\source\\repos\\LasSystem\\Import\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
