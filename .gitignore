@@ -60,3 +60,5 @@ Migrations/*Designer.cs
 ## Other
 *.db
 *.sqlite
+/Import/obj/Debug/net9.0/Import.csproj.FileListAbsolute.txt
+/Import/obj/Debug/net9.0/Import.AssemblyInfoInputs.cache
