@@ -38,8 +38,8 @@ namespace Domain.Services
 
             var isPensionar = person.Anstallningar.Any(a => a.AvgangsorsaksTyp == AvgangsorsaksTyp.PEN) || HarPasseratPensionsAldern(kund.Pensionsalder, person.Personnummer);
             var isTv = person.Anstallningar.Any(a => a.AnstallningsKlassificeringTyp == AnstallningsKlassificeringTyp.TVH || a.AnstallningsKlassificeringTyp == AnstallningsKlassificeringTyp.TVD);
-            var egenBegäran = person.Anstallningar.Any() && person.Anstallningar.OrderBy(a => a.Tom).Last().AvgangsorsaksTyp == AvgangsorsaksTyp.EFT;
-
+            var egenBegäran = person.Anstallningar.Any() && person.Anstallningar.OrderBy(a => a.Tom == null).ThenByDescending(a => a.Tom).First().AvgangsorsaksTyp == AvgangsorsaksTyp.EFT;
+  
             if (isPensionar)
                 person.Info = "Pensionär";
             if (isTv)
@@ -53,6 +53,7 @@ namespace Domain.Services
                 person.Info += ", saknar anställningar";
                 return;
             }
+
             var tid = new List<DateOnly>();
             var foretradeAllman = new List<CalcObj>();
             var sav = new List<CalcObj>();
@@ -84,7 +85,18 @@ namespace Domain.Services
                         continue;
 
                     if (!ExcludedAnstallningsTid.Contains(anst.AnstallningsKlassificeringTyp))
-                        tid.Add(i);
+                    {
+                        if (klass == AnstallningsKlassificeringTyp.SÄV)
+                        {
+                            if (i >= sav20221001)
+                                tid.Add(i);
+                        }
+                        else
+                        {
+                            tid.Add(i);
+                        }
+                       
+                    }
 
                     if (isPensionar || isTv || egenBegäran)
                         continue;
@@ -191,14 +203,16 @@ namespace Domain.Services
             person.ForetradeAllmanSenasteTid = foretradeAllman.Where(f => f.Datum >= foretradeAllmanSenast.AddYears(-3).AddDays(1) && f.Datum <= foretradeAllmanSenast).Select(f => f.Datum).Distinct().Count();   
             person.ForetradeSavIdagTid = sav.Where(f => f.Datum >= treArTillbaka && f.Datum <= now).Select(f => f.Datum).Distinct().Count();
             person.ForetradeSavSenasteTid = sav.Where(f => f.Datum >= foretradeSavSenaste.AddYears(-3).AddDays(1) && f.Datum <= foretradeSavSenaste).Select(f => f.Datum).Distinct().Count();
-            x//Förertäde säsong idag tid
+            //Förertäde säsong idag tid
             //Förertäde säsong senaste tid
+
+    
             person.KonverteringSavIdagTid = sav.Where(s => s.Datum >= femArTillbaka && s.Datum <= now).Select(s => s.Datum).Distinct().Count();
-            person.KonverteringSavSenasteTid = sav.Where(s => s.Datum >= konverteringSavSenaste.AddYears(-5).AddDays(1) && s.Datum <= konverteringSavSenaste).Select(s => s.Datum).Distinct().Count();
+            person.KonverteringSavSenasteTid = sav.Where(s => s.Datum >= foretradeAllmanSenast.AddYears(-5).AddDays(1) && s.Datum <= foretradeAllmanSenast).Select(s => s.Datum).Distinct().Count();
             person.KonverteringVikIdagTid = vik.Where(v => v.Datum >= femArTillbaka && v.Datum <= now).Select(v => v.Datum).Distinct().Count();
-            person.KonverteringVikSenasteTid = vik.Where(s => s.Datum >= konverteringVikSenaste.AddYears(-5).AddDays(1) && s.Datum <= konverteringVikSenaste).Select(s => s.Datum).Distinct().Count();
+            person.KonverteringVikSenasteTid = vik.Where(s => s.Datum >= foretradeAllmanSenast.AddYears(-5).AddDays(1) && s.Datum <= foretradeAllmanSenast).Select(s => s.Datum).Distinct().Count();
             person.KonverteringAvaIdagTid = ava.Where(v => v.Datum >= femArTillbaka && v.Datum <= now).Select(v => v.Datum).Distinct().Count();
-            person.KonverteringAvaSenasteTid = ava.Where(s => s.Datum >= konverteringAvaSenaste.AddYears(-5).AddDays(1) && s.Datum <= konverteringAvaSenaste).Select(s => s.Datum).Distinct().Count();
+            person.KonverteringAvaSenasteTid = ava.Where(s => s.Datum >= foretradeAllmanSenast.AddYears(-5).AddDays(1) && s.Datum <= foretradeAllmanSenast).Select(s => s.Datum).Distinct().Count();
             person.AnstallningsTid = tid.Distinct().Count();
 
             //Företrädesdatum säv idag

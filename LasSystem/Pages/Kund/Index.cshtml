@@ -17,6 +17,8 @@
     <button type="submit" class="btn btn-primary">OK</button>
 </form>
 
+
+
 @if (Model.Person != null)
 {
     <br />
@@ -24,8 +26,14 @@
     <p>@Model.Person.Personnummer</p>
     <p>@Model.Person.Info</p>
 
-    <h2>Företräde och konvertering</h2>
-   
+    @functions {
+        string FormatDate(DateOnly date) => date == DateOnly.MinValue ? "" : date.ToString("yyyy-MM-dd");
+    }
+
+    var senasteLas = FormatDate(Model.Person.ForetradeAllmanSenasteAnstallningDatum);
+
+    <h2>Företräde</h2>
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -39,29 +47,44 @@
         <tbody>
             <tr>
                 <td>Förerträde Allmän</td>
-                <td>@Model.Person.ForetradeAllmanIdagTid</td>
                 <td>@Model.Person.ForetradeAllmanSenasteTid</td>
+                <td>@Model.Person.ForetradeAllmanIdagTid</td>
                 <td>@(Model.Person.ForetradeAllmanSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeAllmanSenasteAnstallningDatum)</td>
                 <td>@(Model.Person.ForetradeAllmanDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeAllmanDatum)</td>
             </tr>
             <tr>
                 <td>Företräde Säv</td>
-                <td>@Model.Person.ForetradeSavIdagTid</td>
                 <td>@Model.Person.ForetradeSavSenasteTid</td>
+                <td>@Model.Person.ForetradeSavIdagTid</td>          
                 <td>@(Model.Person.ForetradeSavSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSavSenasteAnstallningDatum)</td>
                 <td>@(Model.Person.ForetradeSavDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSavDatum)</td>
             </tr>
-            <tr>
+     @*        <tr>
                 <td>Företräde Säsong</td>
-                <td>@Model.Person.ForetradeSasongIdagTid</td>
                 <td>@Model.Person.ForetradeSasongSenasteTid</td>
+                <td>@Model.Person.ForetradeSasongIdagTid</td>
                 <td>@(Model.Person.ForetradeSasongSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSasongSenasteAnstallningDatum)</td>
                 <td>@(Model.Person.ForetradeSasongDatum == DateOnly.MinValue ? "" : Model.Person.ForetradeSasongDatum)</td>
+            </tr> *@
+        </tbody>
+    </table>
+
+    <h2>Konvertering</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Idag</th>
+                <th>Senaste <span style="font-weight: normal;">tom @(senasteLas)</span></th>
+                <th>Senaste anställning</th>
+                <th>Datum</th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td>Konvertering Vik</td>
-                <td>@Model.Person.KonverteringVikIdagTid</td>
                 <td>@Model.Person.KonverteringVikSenasteTid</td>
+                <td>@Model.Person.KonverteringVikIdagTid</td>
                 <td>@(Model.Person.KonverteringVikSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringVikSenasteAnstallningDatum)</td>
                 <td>@(Model.Person.KonverteringVikDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringVikDatum)</td>
             </tr>
@@ -74,8 +97,8 @@
             </tr>
             <tr>
                 <td>Konvertering Ava</td>
-                <td>@Model.Person.KonverteringAvaIdagTid</td>
                 <td>@Model.Person.KonverteringAvaSenasteTid</td>
+                <td>@Model.Person.KonverteringAvaIdagTid</td>
                 <td>@(Model.Person.KonverteringAvaSenasteAnstallningDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringAvaSenasteAnstallningDatum)</td>
                 <td>@(Model.Person.KonverteringAvaDatum == DateOnly.MinValue ? "" : Model.Person.KonverteringAvaDatum)</td>
             </tr>
@@ -178,17 +201,17 @@
                         <td style="white-space: nowrap;">@dagar.AvtalKod</td>
                         <td style="white-space: nowrap;">@dagar.AnstallningsKlassificeringTyp.ToString()</td>
                         <td style="white-space: nowrap;">@dagar.AnstallningsKlassificeringKod</td>
-                        <td style="white-space: nowrap;">@(dagar.AvgangsorsaksTyp == AvgangsorsaksTyp.NaN ? "" : dagar.AvgangsorsaksTyp.ToString())</td>
-                        <td style="white-space: nowrap;">@dagar.AvgangsorsakKod</td>
-                        <td style="white-space: nowrap;">@dagar.Sysselsattningsgrad.ToString("N3")</td>
-                        <td style="white-space: nowrap;">@dagar.OrganisationsKod</td>
-                        <td style="white-space: nowrap;">@dagar.OrganisationsText</td>
-                        <td style="white-space: nowrap;">@dagar.BefattningsKod</td>
-                        <td style="white-space: nowrap;">@dagar.BefattninsText</td>
-                        <td style="white-space: nowrap;">@(dagar.Last ? "Ja" : "")</td>
-                        <td style="white-space: nowrap;">@(dagar.Vilande ? "Ja" : "")</td>
-                        <td style="white-space: nowrap;"></td>
-                        <td style="white-space: nowrap;"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 }
             }

@@ -14,8 +14,6 @@ namespace Domain.Services
         public List<DateOnly> KonvVik { get; set; }
 
 
-
-
         public List<(int year, int month)> Get()
         {
             var r1 = MandadsAckar(ForetradeAllman);

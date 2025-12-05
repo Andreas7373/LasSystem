@@ -41,14 +41,14 @@ namespace Application.Common
         {
             return datum.Month == 2 && datum.Day == 29 && DateTime.IsLeapYear(datum.Year);
         }
-        public static DateOnly ParseDate(string input)
+        public static DateOnly ParseDate(string yyMMdd)
         {
-            if (string.IsNullOrWhiteSpace(input) || input.Length != 6)
+            if (string.IsNullOrWhiteSpace(yyMMdd) || yyMMdd.Length != 6)
                 throw new ArgumentException("Felaktigt datumformat, förväntar mig 'yymmdd'.");
 
-            int year = int.Parse(input.Substring(0, 2));
-            int month = int.Parse(input.Substring(2, 2));
-            int day = int.Parse(input.Substring(4, 2));
+            int year = int.Parse(yyMMdd.Substring(0, 2));
+            int month = int.Parse(yyMMdd.Substring(2, 2));
+            int day = int.Parse(yyMMdd.Substring(4, 2));
 
             // Antag att årtal < 50 hör till 2000-talet, annars 1900-talet
             year += year < 50 ? 2000 : 1900;
@@ -58,7 +58,6 @@ namespace Application.Common
 
         public static string SafeSubstring(string input, int startIndex, int length)
         {
-            // Delphi-index startar på 1 → C# startar på 0
             int realIndex = Math.Max(startIndex - 1, 0);
             if (realIndex >= input.Length)
                 return string.Empty;
@@ -69,11 +68,11 @@ namespace Application.Common
             return input.Substring(realIndex, length);
         }
 
-        public static DateOnly ParseIntToDate(int? dateInt)
+        public static DateOnly ParseIntToDate(int? yyyyMMdd)
         {
-            if (dateInt == null) 
+            if (yyyyMMdd == null) 
                 return DateOnly.MinValue;
-            string dateString = dateInt.Value.ToString();
+            string dateString = yyyyMMdd.Value.ToString();
             if (DateOnly.TryParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateOnly date))
             {
                 return date;
